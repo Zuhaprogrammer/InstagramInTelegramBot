@@ -11,6 +11,4 @@ public interface BaseService<T, R> {
     List<T> list();
 
     void delete(R id);
-
-    T update(T t);
 }
