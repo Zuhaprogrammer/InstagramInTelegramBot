@@ -22,4 +22,3 @@ public class JsonUtil {
         return objectMapper.readValue(new File(path), typeReference);
     }
 }
-

@@ -2,7 +2,8 @@ package com.zuhriddin.service;
 
 import java.util.List;
 
-public interface BaseService<T,R> {
+public interface BaseService<T, R> {
+
     T add(T t);
 
     T get(R id);
