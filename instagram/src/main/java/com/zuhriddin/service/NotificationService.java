@@ -24,7 +24,7 @@ public class NotificationService implements BaseService<Notification, UUID> {
 
     private boolean has(List<Notification> notificationList, Notification notification) {
         return notificationList.stream()
-                .anyMatch(n -> n.getId().equals(notification.getId()));
+                .anyMatch(n -> n.getClpId().equals(notification.getClpId()) && n.getUserId().equals(notification.getUserId()));
     }
 
     @Override
@@ -48,23 +48,9 @@ public class NotificationService implements BaseService<Notification, UUID> {
         write(notificationList);
     }
 
-    public void update(Notification notification) {
-        List<Notification> notificationList = read();
-        notificationList.stream()
-                .filter(n -> n.getId().equals(notification.getId()))
-                .findFirst()
-                .ifPresentOrElse(
-                        n -> {
-                            n.setRead(true);
-                            write(notificationList);
-                        },
-                        () -> { throw new RuntimeException(); }
-                );
-    }
-
     public List<Notification> notificationList(UUID userId) {
         return read().stream()
-                .filter(n -> n.getUserId().equals(userId) && !n.isRead())
+                .filter(n -> n.getUserId().equals(userId))
                 .collect(Collectors.toList());
     }
 

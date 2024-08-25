@@ -49,15 +49,15 @@ public class FollowService implements BaseService<Follow, UUID> {
         write(followList);
     }
 
-    public List<Follow> getFollowers(UUID idFollower) {
+    public List<Follow> getFollowers(UUID id) {
         return read().stream()
-                .filter(n -> n.getFollowerId().equals(idFollower))
+                .filter(n -> n.getFollowingId().equals(id))
                 .collect(Collectors.toList());
     }
 
-    public List<Follow> getFollowings(UUID idFollowing) {
+    public List<Follow> getFollowings(UUID id) {
         return read().stream()
-                .filter(n -> n.getFollowingId().equals(idFollowing))
+                .filter(n -> n.getFollowerId().equals(id))
                 .collect(Collectors.toList());
     }
 
