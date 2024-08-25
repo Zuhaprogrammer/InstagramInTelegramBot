@@ -66,24 +66,8 @@ public class UserService implements BaseService<User, UUID>{
         return users.stream()
                 .filter(u -> u.getUsername().equals(username))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElse(null);
     }
-
-//    public User searchUserByUsername(String username) {
-//        List<User> users = read();
-//        return users.stream()
-//                .filter(u -> u.getUsername().contains(username))
-//                .findFirst()
-//                .orElse(null);
-//    }
-
-//    public User findUser(List<Like> likes, String username, UUID userId) {
-//        User user = searchUserByUsername(username);
-//        return likes.stream()
-//                .filter(l -> l.getUserId().equals(user.getId()))
-//                .findFirst()
-//                .orElse(null);
-//    }
 
     private List<User> read() {
         return JsonUtil.read(PATH, new TypeReference<>() {});

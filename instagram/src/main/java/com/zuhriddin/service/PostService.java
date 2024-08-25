@@ -54,9 +54,6 @@ public class PostService implements BaseService<Post, UUID> {
 
     public List<Post> listMyPosts(UUID userId) {
         List<Post> posts = read();
-//        if (posts == null || posts.isEmpty()) {
-//            return Collections.emptyList();
-//        }
         return posts.stream()
                 .filter(post -> post.getUserId().equals(userId))
                 .collect(Collectors.toList());
@@ -64,9 +61,6 @@ public class PostService implements BaseService<Post, UUID> {
 
     public List<Post> listOthersPosts(UUID userId) {
         List<Post> posts = read();
-//        if (posts == null || posts.isEmpty()) {
-//            return Collections.emptyList();
-//        }
         return posts.stream()
                 .filter(post -> !post.getUserId().equals(userId))
                 .collect(Collectors.toList());
