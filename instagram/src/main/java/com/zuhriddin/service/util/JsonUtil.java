@@ -2,6 +2,7 @@ package com.zuhriddin.service.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
@@ -14,6 +15,7 @@ public class JsonUtil {
 
     @SneakyThrows
     public <T> void write(String path, T t) {
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.writeValue(new File(path), t);
     }
 
@@ -21,4 +23,6 @@ public class JsonUtil {
     public <T> List<T> read(String path, TypeReference<List<T>> typeReference) {
         return objectMapper.readValue(new File(path), typeReference);
     }
+
+
 }

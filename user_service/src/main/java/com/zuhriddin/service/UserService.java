@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserService implements BaseService<User, UUID>{
-    private static final String PATH = "src/main/java/com/zuhriddin/file/users.json";
+    private static final String PATH = "user_service/src/file/users.json";
 
     @Override
     public User add(User user) {
@@ -69,7 +69,18 @@ public class UserService implements BaseService<User, UUID>{
                 .orElse(null);
     }
 
+    public User checkUserByChatId(Long chatId) {
+        List<User> list = read();
+        System.out.println(list.isEmpty());
+        return list.stream()
+                .filter(n -> n.getChatId().equals(chatId))
+                .findFirst()
+                .orElse(null);
+
+    }
+
     private List<User> read() {
+        System.out.println("Read");
         return JsonUtil.read(PATH, new TypeReference<>() {});
     }
 
