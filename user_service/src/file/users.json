@@ -3,7 +3,7 @@
   "id" : null,
   "chatId" : 1750270299,
   "name" : "Abdulaziz",
-  "username" : null,
+  "username" : "laziz",
   "password" : null,
   "phoneNumber" : "998918452020",
   "email" : null,
@@ -13,6 +13,21 @@
   "link" : null,
   "createdDate" : null,
   "lastActiveTime" : null,
-  "gender" : null,
-  "userState" : null
+  "gender" : null
+}, {
+  "currentStep" : 4,
+  "id" : null,
+  "chatId" : 867719044,
+  "name" : "Zuhriddin",
+  "username" : "zuhaadmin",
+  "password" : "12345",
+  "phoneNumber" : "+998995504506",
+  "email" : null,
+  "imagePath" : null,
+  "bio" : null,
+  "birthDate" : null,
+  "link" : null,
+  "createdDate" : 1724785528409,
+  "lastActiveTime" : null,
+  "gender" : null
 } ]

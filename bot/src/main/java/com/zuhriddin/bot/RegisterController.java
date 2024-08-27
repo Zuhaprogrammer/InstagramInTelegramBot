@@ -15,18 +15,19 @@ import java.util.*;
 public class RegisterController {
 
     private static final UserService userService = new UserService();
-    private Map<Long, User> userMap = new HashMap<>();
     private static ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
     private static List<KeyboardRow> keyboardRows = new ArrayList<>();
     private static KeyboardRow row = new KeyboardRow();
     private static KeyboardButton keyboardButton = new KeyboardButton();
 
-    public SendMessage buildUser(long chatId, Update update) {
+    public SendMessage buildUser(SendMessage sendMessage, long chatId, Update update, Map<Long, User> userMap) {
         String text = update.getMessage().getText();
         User user = userMap.get(chatId);
 
+
         if (user == null) {
             user = new User();
+            user.setId(UUID.randomUUID());
 
             if (text.equalsIgnoreCase("Automatic register")) {
                 return sendRequestForContact(update);
@@ -41,43 +42,45 @@ public class RegisterController {
 
         }
 
+        System.out.println(user.toString());
+
         switch (user.getCurrentStep()) {
             case 0 -> {
                 user.setCurrentStep(1);
                 userMap.put(chatId, user);
-                return sendTextMessage(chatId, "Enter name");
-
+                sendMessage.setText("Enter name");
             }
             case 1 -> {
                 user.setName(text);
                 user.setCurrentStep(2);
                 userMap.put(chatId, user);
-                return sendTextMessage(chatId, "Enter username");
-
+                sendMessage.setText("Enter username");
             }
             case 2 -> {
                 user.setUsername(text);
                 user.setCurrentStep(3);
                 userMap.put(chatId, user);
-                return sendTextMessage(chatId, "Enter your phone Number");
-
+                sendMessage.setText("Enter your phone Number");
             }
             case 3 -> {
                 user.setPhoneNumber(text);
                 user.setCurrentStep(4);
                 userMap.put(chatId, user);
-                return sendTextMessage(chatId, "Enter password");
+                sendMessage.setText("Enter password");
             }
             case 4 -> {
                 user.setPassword(text);
                 user.setChatId(chatId);
                 user.setCreatedDate(new Date());
                 userMap.put(chatId, user);
-                userService.add(userMap.get(chatId));
-                userMap.remove(user);
+                System.out.println(user);
+                userService.add(user);
+                userMap.remove(chatId);
+
+                printLogin(sendMessage);
             }
         }
-        return new SendMessage();
+        return sendMessage;
     }
 
     private SendMessage sendRequestForContact(Update update) {
@@ -147,5 +150,17 @@ public class RegisterController {
         sendMessage.setChatId(chatId);
         sendMessage.setText(text);
         return sendMessage;
+    }
+
+    public void printLogin(SendMessage sendMessage) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        KeyboardRow keyboardRow = new KeyboardRow();
+        keyboardRow.add(new KeyboardButton("Login"));
+
+        replyKeyboardMarkup.setKeyboard(List.of(keyboardRow));
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
+        sendMessage.setText("You must authenticate.");
     }
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class FollowService implements BaseService<Follow, UUID> {
-    private static final String PATH = "resurces/Follows.json";
+    private static final String PATH = "instagram/resource/Follows.json";
 
 
     @Override

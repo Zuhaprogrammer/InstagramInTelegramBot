@@ -24,8 +24,7 @@ public class UserService implements BaseService<User, UUID>{
     private boolean has(User user, List<User> users) {
         return users.stream()
                 .anyMatch(u -> u.getUsername().equals(user.getUsername()) &&
-                        u.getPhoneNumber().equals(user.getPhoneNumber()) &&
-                        u.getEmail().equals(user.getEmail()));
+                        u.getPhoneNumber().equals(user.getPhoneNumber()));
     }
 
     @Override
@@ -52,13 +51,17 @@ public class UserService implements BaseService<User, UUID>{
         write(users);
     }
 
-    public User login(String username, String password) {
+    public User login(Long chatId, String phoneNumber, String password) {
         List<User> users = read();
-        return users.stream()
-                .filter(u -> u.getUsername().equals(username) &&
-                        u.getPassword().equals(password))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+
+        User user = checkUserByChatId(chatId);
+
+        if (user != null) {
+            if (user.getPhoneNumber().equals(phoneNumber) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public User getUserByUserName(String username) {
@@ -71,7 +74,7 @@ public class UserService implements BaseService<User, UUID>{
 
     public User checkUserByChatId(Long chatId) {
         List<User> list = read();
-        System.out.println(list.isEmpty());
+
         return list.stream()
                 .filter(n -> n.getChatId().equals(chatId))
                 .findFirst()

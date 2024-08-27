@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PostService implements BaseService<Post, UUID> {
-    private static final String PATH = "src/main/java/com/zuhriddin/file/posts.json";
+    private static final String PATH = "instagram/resource/posts.json";
 
     @Override
     public Post add(Post post) {

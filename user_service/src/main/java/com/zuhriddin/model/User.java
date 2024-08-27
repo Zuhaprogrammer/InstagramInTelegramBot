@@ -31,6 +31,5 @@ public class User {
     private Date createdDate;
     private LocalDateTime lastActiveTime;
     private Gender gender;
-    private UserState userState;
 }
 
