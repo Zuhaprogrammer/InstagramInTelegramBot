@@ -1,0 +1,33 @@
+[ {
+  "id" :"11d3a630-b083-4fc4-aaa6-e51ba60cf2ad"  ,
+  "chatId" : 1750270299,
+  "name" : "Abdulaziz",
+  "username" : null,
+  "password" : null,
+  "phoneNumber" : "998918452020",
+  "email" : null,
+  "imagePath" : null,
+  "bio" : null,
+  "birthDate" : null,
+  "link" : null,
+  "createdDate" : null,
+  "lastActiveTime" : null,
+  "gender" : null,
+  "userState" : null
+}, {
+  "id" :"11d3a630-b083-4fc4-aaa6-e51ba60cf2ad"  ,
+  "chatId" : 293999776,
+  "name" : "Nodir",
+  "username" : null,
+  "password" : null,
+  "phoneNumber" : "998918452020",
+  "email" : null,
+  "imagePath" : null,
+  "bio" : null,
+  "birthDate" : null,
+  "link" : null,
+  "createdDate" : null,
+  "lastActiveTime" : null,
+  "gender" : null,
+  "userState" : null
+} ]
