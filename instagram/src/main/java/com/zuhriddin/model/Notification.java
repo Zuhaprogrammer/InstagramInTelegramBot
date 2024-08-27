@@ -15,4 +15,5 @@ public class Notification {
     private UUID id;
     private UUID clpId;
     private UUID userId;
+
 }

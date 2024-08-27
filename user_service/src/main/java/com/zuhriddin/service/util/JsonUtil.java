@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @UtilityClass
@@ -17,8 +18,12 @@ public class JsonUtil {
         objectMapper.writeValue(new File(path), t);
     }
 
-    @SneakyThrows
     public <T> List<T> read(String path, TypeReference<List<T>> typeReference) {
-        return objectMapper.readValue(new File(path), typeReference);
+        System.out.println(new File(path).exists());
+        try {
+            return objectMapper.readValue(new File(path), typeReference);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

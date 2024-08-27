@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class NotificationService implements BaseService<Notification, UUID> {
-    private static final String PATH = "resurces/Notification.json";
+    private static final String PATH = "instagram/resource/Notification.json";
 
     @Override
     public Notification add(Notification notification) {
