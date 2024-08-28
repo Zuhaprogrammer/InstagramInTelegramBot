@@ -1,5 +1,6 @@
 package com.zuhriddin.model;
 
+import com.zuhriddin.model.enumeration.PostState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,7 @@ public class Post {
     private String title;
     private String content;
     private String location;
+    private String photoPath;
+    private PostState postState;
     private LocalDateTime createDate;
 }

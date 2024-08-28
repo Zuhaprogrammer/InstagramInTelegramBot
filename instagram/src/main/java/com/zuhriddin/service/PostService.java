@@ -9,17 +9,22 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PostService implements BaseService<Post, UUID> {
-    private static final String PATH = "src/main/java/com/zuhriddin/file/posts.json";
+    private static final String PATH = "resource/posts.json";
 
     @Override
     public Post add(Post post) {
         List<Post> posts = read();
+
         if (!has(post, posts)) {
             posts.add(post);
             write(posts);
             return post;
         }
-        throw new RuntimeException("This post already exists.");
+
+        int index = posts.indexOf(post);
+        posts.set(index, post);
+        write(posts);
+        return post;
     }
 
     private boolean has(Post post, List<Post> posts) {
